@@ -1,0 +1,25 @@
+pipeline{
+
+    agent {
+        label 'NODEJS'
+    }
+
+    stages {
+
+        stage('prepare Artifacts') {
+            steps {
+                sh '''
+                  zip -r payment.zip payment.ini payment.py rabbitmq.py requirements.txt
+               '''
+            }
+
+        }
+        stage('upload Artifacts') {
+            steps {
+                sh '''
+           curl -f -v -u admin:DevOps321 --upload-file payment.zip http://172.31.13.99:8081/repository/payment/payment.zip
+          '''
+            }
+        }
+    }
+}
