@@ -1,25 +1,9 @@
-pipeline{
+@Library('roboshop') _
 
-    agent {
-        label 'NODEJS'
-    }
-
-    stages {
-
-        stage('prepare Artifacts') {
-            steps {
-                sh '''
-                  zip -r payment.zip payment.ini payment.py rabbitmq.py requirements.txt
-               '''
-            }
-
-        }
-        stage('upload Artifacts') {
-            steps {
-                sh '''
-           curl -f -v -u admin:DevOps321 --upload-file payment.zip http://172.31.13.99:8081/repository/payment/payment.zip
-          '''
-            }
-        }
-    }
-}
+roboshop (
+    COMPONENT                 : 'payment',
+    PROJECT_NAME              : "RoboShop",
+    SLAVE_LABEL               : "MASTER",
+    SKIP_NEXUS_UPLOAD         :  false,
+    APP_TYPE                  :  "PYTHON"
+) 
