@@ -3,7 +3,7 @@
 roboshop (
     COMPONENT                 : 'payment',
     PROJECT_NAME              : "roboShop",
-    SLAVE_LABEL               : "MASTER",
+    SLAVE_LABEL               : "node",
     SKIP_NEXUS_UPLOAD         :  false,
     APP_TYPE                  :  "PYTHON"
 ) 
